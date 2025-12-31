@@ -15,7 +15,7 @@ An intelligent roommate assignment system that uses a modified Irving's stable r
 
 ## Installation
 
-1. Clone this repository or [download the zip file](https://github.com/akhil-datla/RoommateMatcher/archive/refs/heads/main.zip).
+1. Clone this repository or [download the zip file](https://github.com/VCHS-DECA-Software/RoommateMatcher/archive/refs/heads/main.zip).
 
 2. Install [pip](https://pip.pypa.io/en/stable/installation/) if you haven't already.
 
