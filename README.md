@@ -2,27 +2,80 @@
 
 [![CodeQL](https://github.com/akhil-datla/RoommateMatcher/actions/workflows/codeql.yml/badge.svg)](https://github.com/akhil-datla/Roommate-Matcher/actions/workflows/codeql.yml)
 
-1. Clone this GitHub repository or [download the zip file](https://github.com/akhil-datla/RoommateMatcher/archive/refs/heads/main.zip).
+An intelligent roommate assignment system that uses a modified Irving's stable roommate algorithm to optimally match students into rooms based on their preferences while respecting constraints like same-gender groupings and grade level compatibility.
 
-2. [Edit the group size](https://github.com/akhil-datla/RoommateMatcher/blob/main/main.py#L7) (default: 4).
+## Features
 
-3. Download [pip](https://pip.pypa.io/en/stable/installation/) if you need to.
+- Preference-based matching using student survey responses
+- Same-gender room enforcement
+- Configurable grade level restrictions
+- Configurable room sizes
+- Multiple optimization passes for best results
+- Detailed error reporting for invalid preferences
 
-4. Open Terminal or Command Prompt and navigate to the directory with the program files. 
+## Installation
 
-5. Run `pip install -r requirements.txt`.
+1. Clone this repository or [download the zip file](https://github.com/akhil-datla/RoommateMatcher/archive/refs/heads/main.zip).
 
-6. Create a Google Form with the following questions. **NOTE: ENABLE THE `Collect email addresses` OPTION. QUESTIONS MARKED REQUIRED(*) ARE REQUIRED FOR THE PYTHON PROGRAM. QUESTIONS MUST MATCH THE CASE AND THE WORDING AS SHOWN IN THE IMAGE.**
+2. Install [pip](https://pip.pypa.io/en/stable/installation/) if you haven't already.
+
+3. Open Terminal or Command Prompt and navigate to the project directory.
+
+4. Install dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+## Data Collection
+
+Create a Google Form with the following questions:
+
+> **Important:** Enable the "Collect email addresses" option. Questions marked with (*) are required for the program. Questions must match the exact wording shown below.
 
 <img width="430" alt="Google Form Questionnaire" src="https://user-images.githubusercontent.com/66145155/171505113-8369ce68-fcdd-4066-92b7-139e056b36aa.png">
 
-7. Check the corresponding Google Sheet and ensure all the fields present in the following image are the the same as yours.
+Verify your Google Sheet has these columns:
 
-<img width="1126" alt="Screen Shot 2022-06-01 at 2 31 47 PM" src="https://user-images.githubusercontent.com/66145155/171505374-3c4b0403-4e09-43de-8d95-c46dcfc78acf.png">
+<img width="1126" alt="Google Sheet Columns" src="https://user-images.githubusercontent.com/66145155/171505374-3c4b0403-4e09-43de-8d95-c46dcfc78acf.png">
 
-8. Download the CSV file of the spreadsheet.
+Download the spreadsheet as a CSV file.
 
-9. Run `python main.py <CSV file path>`. **NOTE: Replace `<CSV file path>` with the path to the CSV file of the spreadsheet.**
+## Usage
 
-After the program runs successfully, a new file called `rooms.csv` will be generated with the room assignments.
+Run the program:
 
+```bash
+python main.py
+```
+
+You will be prompted for:
+- **Maximum students per room**: The maximum number of students allowed in each room (default: 4)
+- **Maximum grade level difference**: How many grades apart students can be to room together (default: 1)
+- **CSV file path**: Path to your downloaded Google Form responses
+
+## Output
+
+The program generates two files:
+
+- `rooms.csv`: Room assignments with student names, genders, and grades
+- `errors.csv`: Any preference errors (e.g., preferences for students not in the dataset, cross-gender preferences, or grade constraint violations)
+
+## Algorithm
+
+The matching algorithm:
+
+1. Separates students by gender to ensure same-gender rooms
+2. Builds a preference matrix from survey responses (1st choice = 10 points, 2nd = 7, 3rd = 4)
+3. Runs multiple matching attempts with random initialization
+4. Optimizes for maximum preference satisfaction
+5. Returns the best result across all attempts
+
+## Requirements
+
+- Python 3.7+
+- pandas
+- numpy
+
+## License
+
+MIT License
