@@ -298,7 +298,7 @@ def format_room_output(df, groups):
         room = []
         for idx in group:
             student = df.iloc[idx]
-            room.append(f"Full Name: {student['Full Name']}, Gender: {student['Gender']}, Grade: {student['Grade']}")
+            room.append(f"Full Name: {student['Full Name']}, Email: {student['Email Address']}, Gender: {student['Gender']}, Grade: {student['Grade']}")
         rooms.append(room)
     return rooms
 
